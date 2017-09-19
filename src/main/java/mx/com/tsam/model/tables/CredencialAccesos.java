@@ -5,6 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -25,13 +28,14 @@ public class CredencialAccesos implements Serializable {
 	 * Llave primaria (Primary Key = PK)
 	 * Llave foranea (Forein Key = FK)
 	 */
+	@Id
 	@Column(name = "id_usuario_login")
 	private int id_usuario_login;
 	
 	/**
 	 * Unique value
 	 */
-	@Column(name = "nickname")
+	@Column(name = "nickname", unique = true)
 	private String nickname;
 	
 	@Column(name = "password_sha256")
@@ -48,6 +52,10 @@ public class CredencialAccesos implements Serializable {
 	
 	@Column(name = "registro_habilitado")
 	private boolean registro_habilitado;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn(name = "id_usuario_login")
+	private Usuarios id_usuario;
 	
 	/**
 	 * Constructor default
@@ -176,6 +184,19 @@ public class CredencialAccesos implements Serializable {
 	public void setRegistro_habilitado(boolean registro_habilitado) {
 		this.registro_habilitado = registro_habilitado;
 	}
-	
-	
+
+	/**
+	 * @return the id_usuario
+	 */
+	public Usuarios getId_usuario() {
+		return id_usuario;
+	}
+
+	/**
+	 * @param id_usuario the id_usuario to set
+	 */
+	public void setId_usuario(Usuarios id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+		
 }

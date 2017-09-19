@@ -3,6 +3,7 @@ package mx.com.tsam.model.tables;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -79,6 +80,12 @@ public class Usuarios implements Serializable {
 	
 	@Column(name = "registro_habilitado")
 	private boolean registro_habilitado;
+	
+	/**
+	 * Asociación con la tabla CredencialAccesos
+	 */
+	@OneToOne(mappedBy = "usuarios", cascade = CascadeType.ALL)
+	private CredencialAccesos credencialAcceso;
 	
 	/**
 	 * Constructor default
@@ -330,6 +337,20 @@ public class Usuarios implements Serializable {
 	 */
 	public void setRegistro_habilitado(boolean registro_habilitado) {
 		this.registro_habilitado = registro_habilitado;
+	}
+
+	/**
+	 * @return the credencialAcceso
+	 */
+	public CredencialAccesos getCredencialAcceso() {
+		return credencialAcceso;
+	}
+
+	/**
+	 * @param credencialAcceso the credencialAcceso to set
+	 */
+	public void setCredencialAcceso(CredencialAccesos credencialAcceso) {
+		this.credencialAcceso = credencialAcceso;
 	}
 	
 }
